@@ -17,16 +17,30 @@ namespace Sabroso
         
         [MaxLength(13)]
         [Index("Proveedor_Ruc_Index", IsUnique = true)]
-        public string Ruc { get; set; }
+        public string Ruc
+        {
+            get { return CodigoFilter; }
+            set { CodigoFilter = value; }
+        }
         [Required]
         [MaxLength(40)]
-        public string Descripcion { get; set; }
+        public string Descripcion
+        {
+            get { return DisplayMember; }
+            set { DisplayMember = value; }
+        }
         public virtual ICollection<CabeceraCompra> CabeceraCompra { get; set; }
 
-        public override string DisplayMember
+        public new string DisplayMember
         {
-            get { return Descripcion; }
-            set { Descripcion = value; }
+            get { return base.DisplayMember; }
+            set { base.DisplayMember = value; }
+        }
+
+        public new string CodigoFilter
+        {
+            get { return base.CodigoFilter; }
+            set { base.CodigoFilter = value; }
         }
     }
 }

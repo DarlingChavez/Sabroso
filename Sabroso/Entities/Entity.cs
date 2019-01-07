@@ -15,6 +15,8 @@ namespace Sabroso
         [Required]
         public Status Status { get; set; }
         [NotMapped]
-        public abstract string DisplayMember { get; set; }
+        public string DisplayMember { get; set; }
+        [NotMapped]
+        public string CodigoFilter { get; set; }
     }
 }

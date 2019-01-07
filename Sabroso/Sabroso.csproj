@@ -42,8 +42,28 @@
     <Reference Include="JetEntityFrameworkProvider, Version=6.0.0.0, Culture=neutral, PublicKeyToken=756cf6beb8fe7b41, processorArchitecture=x86">
       <HintPath>..\packages\JetEntityFrameworkProvider.6.1.4\lib\JetEntityFrameworkProvider.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,6 +76,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CurrencyTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CurrencyTextBox.Designer.cs">
+      <DependentUpon>CurrencyTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MyCRUDButtons.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MyCRUDButtons.Designer.cs">
+      <DependentUpon>MyCRUDButtons.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\Context.cs" />
     <Compile Include="Entities\CabeceraCompra.cs" />
     <Compile Include="Entities\CabeceraFactura.cs" />
@@ -97,6 +129,12 @@
     <Compile Include="Forms\FrmCliente.designer.cs">
       <DependentUpon>FrmCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmReportes.Designer.cs">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UIBasicForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,13 +165,76 @@
     <Compile Include="Controls\MyBasicControl.Designer.cs">
       <DependentUpon>MyBasicControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UIChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UIChildForm.Designer.cs">
+      <DependentUpon>UIChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmProveedor.Designer.cs">
+      <DependentUpon>FrmProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmOrdenCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOrdenCompra.Designer.cs">
+      <DependentUpon>FrmOrdenCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmVenta.Designer.cs">
+      <DependentUpon>FrmVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmBuscarEntidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmBuscarEntidad.Designer.cs">
+      <DependentUpon>FrmBuscarEntidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmValidacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmValidacion.Designer.cs">
+      <DependentUpon>FrmValidacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712190248198_InitialCreate.cs" />
+    <Compile Include="Migrations\201712190248198_InitialCreate.Designer.cs">
+      <DependentUpon>201712190248198_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712210446071_TotalFactura.cs" />
+    <Compile Include="Migrations\201712210446071_TotalFactura.Designer.cs">
+      <DependentUpon>201712210446071_TotalFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712221742262_Subtotal.cs" />
+    <Compile Include="Migrations\201712221742262_Subtotal.Designer.cs">
+      <DependentUpon>201712221742262_Subtotal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712221747594_Precio.cs" />
+    <Compile Include="Migrations\201712221747594_Precio.Designer.cs">
+      <DependentUpon>201712221747594_Precio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712222021351_medidaIsInteger.cs" />
+    <Compile Include="Migrations\201712222021351_medidaIsInteger.Designer.cs">
+      <DependentUpon>201712222021351_medidaIsInteger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\UtilsData.cs" />
+    <Compile Include="Reports\ReportUtils.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Controls\MyBasicControl.resx">
       <DependentUpon>MyBasicControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MyButton.resx">
       <DependentUpon>MyButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MyCRUDButtons.resx">
+      <DependentUpon>MyCRUDButtons.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
@@ -143,6 +244,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmCliente.resx">
       <DependentUpon>FrmCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmReportes.resx">
+      <DependentUpon>FrmReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmValidacion.resx">
+      <DependentUpon>FrmValidacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmVenta.resx">
+      <DependentUpon>FrmVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UIBasicForm.resx">
       <DependentUpon>UIBasicForm.cs</DependentUpon>
@@ -156,6 +266,33 @@
     <EmbeddedResource Include="Forms\FrmWelcome.resx">
       <DependentUpon>FrmWelcome.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UIChildForm.resx">
+      <DependentUpon>UIChildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmProveedor.resx">
+      <DependentUpon>FrmProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOrdenCompra.resx">
+      <DependentUpon>FrmOrdenCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmBuscarEntidad.resx">
+      <DependentUpon>FrmBuscarEntidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712190248198_InitialCreate.resx">
+      <DependentUpon>201712190248198_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712210446071_TotalFactura.resx">
+      <DependentUpon>201712210446071_TotalFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712221742262_Subtotal.resx">
+      <DependentUpon>201712221742262_Subtotal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712221747594_Precio.resx">
+      <DependentUpon>201712221747594_Precio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712222021351_medidaIsInteger.resx">
+      <DependentUpon>201712222021351_medidaIsInteger.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -166,8 +303,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\RptFactura.rdlc" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\Entity.datasource" />
+    <None Include="Properties\DataSources\DetalleFactura.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -205,6 +343,90 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bebidas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\products-coca-cola2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cliente.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comida.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\proveedor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancelar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comprar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carrito.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cocinando.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\platillo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\transparente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\limpiar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borrador.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borrador2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\limpiar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\impresora.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imprimir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\facturar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\producto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\candado.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

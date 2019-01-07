@@ -21,21 +21,23 @@ namespace Sabroso
         public Proveedor Proveedor { get; set; }
         [Required]
         public DateTime Fecha { get; set; }
+        [Required]
+        public decimal Total { get; set; }
         public virtual ICollection<DetalleCompra> DetalleCompra { get; set; }
 
-        public override string DisplayMember
-        {
-            get
-            {
-                return (Proveedor != null) ? Proveedor.Descripcion : string.Empty;
-            }
-            set
-            {
-                if (Proveedor != null)
-                {
-                    Proveedor.Descripcion = value;
-                }
-            }
-        }
+        //public override string DisplayMember
+        //{
+        //    get
+        //    {
+        //        return (Proveedor != null) ? Proveedor.Descripcion : string.Empty;
+        //    }
+        //    set
+        //    {
+        //        if (Proveedor != null)
+        //        {
+        //            Proveedor.Descripcion = value;
+        //        }
+        //    }
+        //}
     }
 }

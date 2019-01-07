@@ -14,6 +14,10 @@ namespace Sabroso
         [Required]
         public int Cantidad { get; set; }
         [Required]
+        public decimal PrecioUnitario { get; set; }
+        [Required]
+        public decimal Subtotal { get; set; }
+        [Required]
         [ForeignKey("Producto")]
         public int IdProducto { get; set; }
         public virtual Producto Producto { get; set; }
@@ -21,7 +25,8 @@ namespace Sabroso
         [ForeignKey("CabeceraFactura")]
         public int IdCabeceraFactura { get; set; }
         public virtual CabeceraFactura CabeceraFactura { get; set; }
-        public override string DisplayMember
+
+        public new string DisplayMember
         {
             get
             {
@@ -34,6 +39,16 @@ namespace Sabroso
                     Producto.Descripcion = value;
                 }
             }
+        }
+        [NotMapped]
+        public string PrecioString
+        {
+            get { return PrecioUnitario.ToString("C"); }
+        }
+        [NotMapped]
+        public string SubTotalString
+        {
+            get { return Subtotal.ToString("C"); }
         }
     }
 }

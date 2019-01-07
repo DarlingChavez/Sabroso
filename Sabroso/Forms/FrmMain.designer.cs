@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.labelMain = new System.Windows.Forms.Label();
-            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.menuStripMenu = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formulariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.volverALaPantallaDeBienvenidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantenimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,16 +40,20 @@
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.proveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordenDeCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.puntoDeVentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelTop = new System.Windows.Forms.Panel();
             this.myLabelMin = new Sabroso.MyLabel();
             this.myLabelClose = new Sabroso.MyLabel();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.panelMain = new System.Windows.Forms.Panel();
             this.panelBottom = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.reimprimirFacturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMenu.SuspendLayout();
             this.panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,21 +62,11 @@
             this.labelMain.AutoSize = true;
             this.labelMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMain.ForeColor = System.Drawing.Color.White;
-            this.labelMain.Location = new System.Drawing.Point(59, 9);
+            this.labelMain.Location = new System.Drawing.Point(59, 1);
             this.labelMain.Name = "labelMain";
             this.labelMain.Size = new System.Drawing.Size(152, 31);
             this.labelMain.TabIndex = 1;
             this.labelMain.Text = "El sabroso";
-            // 
-            // pictureBoxLogo
-            // 
-            this.pictureBoxLogo.Image = global::Sabroso.Properties.Resources.cinta;
-            this.pictureBoxLogo.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxLogo.Name = "pictureBoxLogo";
-            this.pictureBoxLogo.Size = new System.Drawing.Size(53, 47);
-            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxLogo.TabIndex = 3;
-            this.pictureBoxLogo.TabStop = false;
             // 
             // menuStripMenu
             // 
@@ -90,11 +84,18 @@
             // menuToolStripMenuItem
             // 
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formulariosToolStripMenuItem,
             this.volverALaPantallaDeBienvenidaToolStripMenuItem,
             this.salirDelSistemaToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.menuToolStripMenuItem.Text = "Sistema";
+            // 
+            // formulariosToolStripMenuItem
+            // 
+            this.formulariosToolStripMenuItem.Name = "formulariosToolStripMenuItem";
+            this.formulariosToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.formulariosToolStripMenuItem.Text = "Formularios";
             // 
             // volverALaPantallaDeBienvenidaToolStripMenuItem
             // 
@@ -132,21 +133,42 @@
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
             this.clientesToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
+            this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // proveedoresToolStripMenuItem
             // 
             this.proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
             this.proveedoresToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.proveedoresToolStripMenuItem.Text = "Proveedores";
+            this.proveedoresToolStripMenuItem.Click += new System.EventHandler(this.proveedoresToolStripMenuItem_Click);
             // 
             // procesosToolStripMenuItem
             // 
+            this.procesosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ordenDeCompraToolStripMenuItem,
+            this.puntoDeVentaToolStripMenuItem});
             this.procesosToolStripMenuItem.Name = "procesosToolStripMenuItem";
             this.procesosToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.procesosToolStripMenuItem.Text = "Procesos";
             // 
+            // ordenDeCompraToolStripMenuItem
+            // 
+            this.ordenDeCompraToolStripMenuItem.Name = "ordenDeCompraToolStripMenuItem";
+            this.ordenDeCompraToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.ordenDeCompraToolStripMenuItem.Text = "Orden de Compra";
+            this.ordenDeCompraToolStripMenuItem.Click += new System.EventHandler(this.ordenDeCompraToolStripMenuItem_Click);
+            // 
+            // puntoDeVentaToolStripMenuItem
+            // 
+            this.puntoDeVentaToolStripMenuItem.Name = "puntoDeVentaToolStripMenuItem";
+            this.puntoDeVentaToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.puntoDeVentaToolStripMenuItem.Text = "Pedidos";
+            this.puntoDeVentaToolStripMenuItem.Click += new System.EventHandler(this.puntoDeVentaToolStripMenuItem_Click);
+            // 
             // reportesToolStripMenuItem
             // 
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reimprimirFacturaToolStripMenuItem});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.reportesToolStripMenuItem.Text = "Reportes";
@@ -161,20 +183,19 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1035, 48);
+            this.panelTop.Size = new System.Drawing.Size(1035, 36);
             this.panelTop.TabIndex = 6;
             // 
             // myLabelMin
             // 
             this.myLabelMin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.myLabelMin.AutoSize = true;
             this.myLabelMin.FirstColor = System.Drawing.Color.Black;
             this.myLabelMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.myLabelMin.ForeColor = System.Drawing.Color.Black;
-            this.myLabelMin.Location = new System.Drawing.Point(967, 0);
+            this.myLabelMin.Location = new System.Drawing.Point(967, 1);
             this.myLabelMin.Name = "myLabelMin";
             this.myLabelMin.SecondColor = System.Drawing.Color.White;
-            this.myLabelMin.Size = new System.Drawing.Size(25, 25);
+            this.myLabelMin.Size = new System.Drawing.Size(25, 24);
             this.myLabelMin.TabIndex = 5;
             this.myLabelMin.Text = "_";
             this.myLabelMin.Click += new System.EventHandler(this.myLabelMin_Click);
@@ -194,24 +215,24 @@
             this.myLabelClose.Text = "X";
             this.myLabelClose.Click += new System.EventHandler(this.myLabelClose_Click);
             // 
+            // pictureBoxLogo
+            // 
+            this.pictureBoxLogo.Image = global::Sabroso.Properties.Resources.cinta;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(44, 33);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLogo.TabIndex = 3;
+            this.pictureBoxLogo.TabStop = false;
+            // 
             // panelMenu
             // 
             this.panelMenu.Controls.Add(this.menuStripMenu);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelMenu.Location = new System.Drawing.Point(0, 48);
+            this.panelMenu.Location = new System.Drawing.Point(0, 36);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(1035, 22);
             this.panelMenu.TabIndex = 7;
-            // 
-            // panelMain
-            // 
-            this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelMain.Location = new System.Drawing.Point(11, 76);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1012, 449);
-            this.panelMain.TabIndex = 8;
             // 
             // panelBottom
             // 
@@ -221,6 +242,24 @@
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(1035, 10);
             this.panelBottom.TabIndex = 9;
+            // 
+            // panelMain
+            // 
+            this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelMain.BackgroundImage = global::Sabroso.Properties.Resources.platillo;
+            this.panelMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelMain.Location = new System.Drawing.Point(11, 76);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(1012, 432);
+            this.panelMain.TabIndex = 8;
+            // 
+            // reimprimirFacturaToolStripMenuItem
+            // 
+            this.reimprimirFacturaToolStripMenuItem.Name = "reimprimirFacturaToolStripMenuItem";
+            this.reimprimirFacturaToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.reimprimirFacturaToolStripMenuItem.Text = "Reimprimir Factura";
             // 
             // FrmMain
             // 
@@ -241,11 +280,11 @@
             this.Text = "";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.menuStripMenu.ResumeLayout(false);
             this.menuStripMenu.PerformLayout();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -272,5 +311,9 @@
         private MyLabel myLabelMin;
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem proveedoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formulariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ordenDeCompraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem puntoDeVentaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reimprimirFacturaToolStripMenuItem;
     }
 }

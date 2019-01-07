@@ -29,6 +29,7 @@ namespace Sabroso
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Properties<decimal>().Configure(c => c.HasPrecision(18, 6));
         }
 
     }

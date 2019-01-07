@@ -85,6 +85,7 @@
             // 
             // myButtonExit
             // 
+            this.myButtonExit.Accion = Sabroso.Actions.New;
             this.myButtonExit.FirstColor = System.Drawing.Color.DarkBlue;
             this.myButtonExit.ForeColor = System.Drawing.Color.DarkBlue;
             this.myButtonExit.Location = new System.Drawing.Point(23, 312);
@@ -98,6 +99,7 @@
             // 
             // myButtonAbout
             // 
+            this.myButtonAbout.Accion = Sabroso.Actions.New;
             this.myButtonAbout.FirstColor = System.Drawing.Color.DarkBlue;
             this.myButtonAbout.ForeColor = System.Drawing.Color.DarkBlue;
             this.myButtonAbout.Location = new System.Drawing.Point(23, 249);
@@ -111,6 +113,7 @@
             // 
             // myButtonStart
             // 
+            this.myButtonStart.Accion = Sabroso.Actions.New;
             this.myButtonStart.FirstColor = System.Drawing.Color.DarkBlue;
             this.myButtonStart.ForeColor = System.Drawing.Color.DarkBlue;
             this.myButtonStart.Location = new System.Drawing.Point(23, 177);
@@ -155,6 +158,8 @@
             this.Controls.Add(this.pictureBoxHome);
             this.MaximizeBox = false;
             this.Name = "FrmWelcome";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcono)).EndInit();

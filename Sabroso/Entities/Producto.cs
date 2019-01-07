@@ -19,22 +19,37 @@ namespace Sabroso
         [Required]
         [MaxLength(15)]
         [Index("Producto_Codigo_Index", IsUnique = true)]
-        public string Codigo { get; set; }
+        public string Codigo
+        {
+            get { return CodigoFilter; }
+            set { CodigoFilter = value; }
+        }
+        //private string descripcion;
         [Required]
         [MaxLength(40)]
-        public string Descripcion { get; set; }
+        public string Descripcion
+        {
+            get { return DisplayMember; }
+            set { DisplayMember = value; }
+        }
         [Required]
         public Categoria Categoria { get; set; }
         [Required]
         public decimal Precio { get; set; }
         [Required]
-        public string Medida { get; set; }
+        public Medida Medida { get; set; }
         public virtual ICollection<DetalleCompra> DetalleCompra { get; set; }
         public virtual ICollection<DetalleFactura> DetalleFactura { get; set; }
-        public override string DisplayMember
+
+        public new string DisplayMember
         {
-            get { return Descripcion; }
-            set { Descripcion = value; }
+            get { return base.DisplayMember; }
+            set { base.DisplayMember = value; }
+        }
+        public new string CodigoFilter
+        {
+            get { return base.CodigoFilter; }
+            set { base.CodigoFilter = value; }
         }
     }
 }

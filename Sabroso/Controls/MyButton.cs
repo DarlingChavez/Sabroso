@@ -33,6 +33,8 @@ namespace Sabroso
             set { secondColor = value; }
         }
 
+        public Actions Accion { get; set; }
+
         private void MyButton_MouseEnter(object sender, EventArgs e)
         {
             this.ForeColor = secondColor;

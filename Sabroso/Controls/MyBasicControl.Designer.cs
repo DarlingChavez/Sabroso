@@ -55,6 +55,7 @@
             this.textBoxFilter.Name = "textBoxFilter";
             this.textBoxFilter.Size = new System.Drawing.Size(246, 20);
             this.textBoxFilter.TabIndex = 0;
+            this.textBoxFilter.TextChanged += new System.EventHandler(this.textBoxFilter_TextChanged);
             // 
             // panelFill
             // 
@@ -62,7 +63,7 @@
             this.panelFill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFill.Location = new System.Drawing.Point(0, 21);
             this.panelFill.Name = "panelFill";
-            this.panelFill.Size = new System.Drawing.Size(246, 377);
+            this.panelFill.Size = new System.Drawing.Size(246, 456);
             this.panelFill.TabIndex = 1;
             // 
             // listBoxItems
@@ -73,9 +74,10 @@
             this.listBoxItems.FormattingEnabled = true;
             this.listBoxItems.Location = new System.Drawing.Point(0, 0);
             this.listBoxItems.Name = "listBoxItems";
-            this.listBoxItems.Size = new System.Drawing.Size(246, 377);
+            this.listBoxItems.Size = new System.Drawing.Size(246, 456);
             this.listBoxItems.TabIndex = 0;
             this.listBoxItems.ValueMember = "Id";
+            this.listBoxItems.SelectedValueChanged += new System.EventHandler(this.listBoxItems_SelectedValueChanged);
             // 
             // entityBindingSource
             // 
@@ -88,7 +90,7 @@
             this.Controls.Add(this.panelFill);
             this.Controls.Add(this.panelTop);
             this.Name = "MyBasicControl";
-            this.Size = new System.Drawing.Size(246, 398);
+            this.Size = new System.Drawing.Size(246, 477);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.panelFill.ResumeLayout(false);
