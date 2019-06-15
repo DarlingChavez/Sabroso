@@ -38,6 +38,7 @@ namespace Sabroso
         public decimal Precio { get; set; }
         [Required]
         public Medida Medida { get; set; }
+        public string RutaImagen { get; set; }
         public virtual ICollection<DetalleCompra> DetalleCompra { get; set; }
         public virtual ICollection<DetalleFactura> DetalleFactura { get; set; }
 

@@ -20,7 +20,7 @@ namespace Sabroso
         [Required]
         [ForeignKey("Producto")]
         public int IdProducto { get; set; }
-        public Producto Producto { get; set; }
+        public virtual Producto Producto { get; set; }
         [Required]
         [ForeignKey("CabeceraCompra")]
         public int IdCabeceraCompra { get; set; }

@@ -58,8 +58,7 @@
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -89,6 +88,7 @@
       <DependentUpon>MyCRUDButtons.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Context.cs" />
+    <Compile Include="Entities\AccesoRapido.cs" />
     <Compile Include="Entities\CabeceraCompra.cs" />
     <Compile Include="Entities\CabeceraFactura.cs" />
     <Compile Include="Entities\Cliente.cs" />
@@ -116,6 +116,12 @@
     </Compile>
     <Compile Include="Forms\FrmAbout.designer.cs">
       <DependentUpon>FrmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmAccesoRapido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmAccesoRapido.Designer.cs">
+      <DependentUpon>FrmAccesoRapido.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmCaja.cs">
       <SubType>Form</SubType>
@@ -221,6 +227,10 @@
     <Compile Include="Migrations\201712222021351_medidaIsInteger.Designer.cs">
       <DependentUpon>201712222021351_medidaIsInteger.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901172140308_RutaImagen.cs" />
+    <Compile Include="Migrations\201901172140308_RutaImagen.Designer.cs">
+      <DependentUpon>201901172140308_RutaImagen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -238,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmAccesoRapido.resx">
+      <DependentUpon>FrmAccesoRapido.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmCaja.resx">
       <DependentUpon>FrmCaja.cs</DependentUpon>
@@ -292,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712222021351_medidaIsInteger.resx">
       <DependentUpon>201712222021351_medidaIsInteger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901172140308_RutaImagen.resx">
+      <DependentUpon>201901172140308_RutaImagen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -408,6 +424,12 @@
     <None Include="Resources\facturar.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\producto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\candado.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -421,12 +443,6 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\producto.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\candado.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

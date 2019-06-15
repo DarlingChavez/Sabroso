@@ -74,8 +74,10 @@ namespace Sabroso
         Paca8,
         [CustomAttribute(5, "Paca de 4")]
         Paca4,
-        [CustomAttribute(7, "Caja")]
-        Caja
+        [CustomAttribute(7, "Caja 10")]
+        Caja10,
+        [CustomAttribute(8, "Caja 9")]
+        Caja9
     }
 
     public enum TipoEntidad

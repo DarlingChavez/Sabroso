@@ -43,8 +43,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxProductos = new System.Windows.Forms.PictureBox();
+            this.groupBoxImagen = new System.Windows.Forms.GroupBox();
+            this.buttonSeleccionarImagen = new System.Windows.Forms.Button();
+            this.pictureBoxImagen = new System.Windows.Forms.PictureBox();
             this.groupBoxEntity.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProductos)).BeginInit();
+            this.groupBoxImagen.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagen)).BeginInit();
             this.SuspendLayout();
             // 
             // myBasicControlEntity
@@ -208,11 +213,42 @@
             this.pictureBoxProductos.TabIndex = 5;
             this.pictureBoxProductos.TabStop = false;
             // 
+            // groupBoxImagen
+            // 
+            this.groupBoxImagen.Controls.Add(this.pictureBoxImagen);
+            this.groupBoxImagen.Controls.Add(this.buttonSeleccionarImagen);
+            this.groupBoxImagen.Location = new System.Drawing.Point(607, 115);
+            this.groupBoxImagen.Name = "groupBoxImagen";
+            this.groupBoxImagen.Size = new System.Drawing.Size(299, 255);
+            this.groupBoxImagen.TabIndex = 6;
+            this.groupBoxImagen.TabStop = false;
+            this.groupBoxImagen.Text = "Imagen";
+            // 
+            // buttonSeleccionarImagen
+            // 
+            this.buttonSeleccionarImagen.Location = new System.Drawing.Point(261, 9);
+            this.buttonSeleccionarImagen.Name = "buttonSeleccionarImagen";
+            this.buttonSeleccionarImagen.Size = new System.Drawing.Size(32, 23);
+            this.buttonSeleccionarImagen.TabIndex = 1;
+            this.buttonSeleccionarImagen.Text = "...";
+            this.buttonSeleccionarImagen.UseVisualStyleBackColor = true;
+            this.buttonSeleccionarImagen.Click += new System.EventHandler(this.buttonSeleccionarImagen_Click);
+            // 
+            // pictureBoxImagen
+            // 
+            this.pictureBoxImagen.Location = new System.Drawing.Point(6, 38);
+            this.pictureBoxImagen.Name = "pictureBoxImagen";
+            this.pictureBoxImagen.Size = new System.Drawing.Size(287, 211);
+            this.pictureBoxImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxImagen.TabIndex = 2;
+            this.pictureBoxImagen.TabStop = false;
+            // 
             // FrmProducto
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1077, 557);
             this.ControlBox = true;
+            this.Controls.Add(this.groupBoxImagen);
             this.Controls.Add(this.pictureBoxProductos);
             this.Controls.Add(this.groupBoxEntity);
             this.Controls.Add(this.myCRUDButtonsProductos);
@@ -228,9 +264,12 @@
             this.Controls.SetChildIndex(this.groupBoxEntity, 0);
             this.Controls.SetChildIndex(this.myBasicControlEntity, 0);
             this.Controls.SetChildIndex(this.pictureBoxProductos, 0);
+            this.Controls.SetChildIndex(this.groupBoxImagen, 0);
             this.groupBoxEntity.ResumeLayout(false);
             this.groupBoxEntity.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProductos)).EndInit();
+            this.groupBoxImagen.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -252,5 +291,8 @@
         private System.Windows.Forms.ComboBox cmbMedida;
         private System.Windows.Forms.PictureBox pictureBoxProductos;
         private CurrencyTextBox txtPrecio;
+        private System.Windows.Forms.GroupBox groupBoxImagen;
+        private System.Windows.Forms.Button buttonSeleccionarImagen;
+        private System.Windows.Forms.PictureBox pictureBoxImagen;
     }
 }

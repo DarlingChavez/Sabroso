@@ -37,6 +37,7 @@
             this.myButtonStart = new Sabroso.MyButton();
             this.metroLabelDetalle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.myButtonFacturar = new Sabroso.MyButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcono)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHome)).BeginInit();
             this.SuspendLayout();
@@ -88,7 +89,7 @@
             this.myButtonExit.Accion = Sabroso.Actions.New;
             this.myButtonExit.FirstColor = System.Drawing.Color.DarkBlue;
             this.myButtonExit.ForeColor = System.Drawing.Color.DarkBlue;
-            this.myButtonExit.Location = new System.Drawing.Point(23, 312);
+            this.myButtonExit.Location = new System.Drawing.Point(23, 355);
             this.myButtonExit.Name = "myButtonExit";
             this.myButtonExit.SecondColor = System.Drawing.Color.DarkOrange;
             this.myButtonExit.Size = new System.Drawing.Size(114, 40);
@@ -102,7 +103,7 @@
             this.myButtonAbout.Accion = Sabroso.Actions.New;
             this.myButtonAbout.FirstColor = System.Drawing.Color.DarkBlue;
             this.myButtonAbout.ForeColor = System.Drawing.Color.DarkBlue;
-            this.myButtonAbout.Location = new System.Drawing.Point(23, 249);
+            this.myButtonAbout.Location = new System.Drawing.Point(23, 292);
             this.myButtonAbout.Name = "myButtonAbout";
             this.myButtonAbout.SecondColor = System.Drawing.Color.DarkOrange;
             this.myButtonAbout.Size = new System.Drawing.Size(114, 40);
@@ -142,11 +143,26 @@
             this.panel2.Size = new System.Drawing.Size(650, 12);
             this.panel2.TabIndex = 8;
             // 
+            // myButtonFacturar
+            // 
+            this.myButtonFacturar.Accion = Sabroso.Actions.New;
+            this.myButtonFacturar.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.myButtonFacturar.FirstColor = System.Drawing.Color.DarkBlue;
+            this.myButtonFacturar.ForeColor = System.Drawing.Color.DarkBlue;
+            this.myButtonFacturar.Location = new System.Drawing.Point(23, 235);
+            this.myButtonFacturar.Name = "myButtonFacturar";
+            this.myButtonFacturar.SecondColor = System.Drawing.Color.DarkOrange;
+            this.myButtonFacturar.Size = new System.Drawing.Size(114, 40);
+            this.myButtonFacturar.TabIndex = 9;
+            this.myButtonFacturar.Text = "Facturar";
+            this.myButtonFacturar.UseVisualStyleBackColor = true;
+            // 
             // FrmWelcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 433);
+            this.Controls.Add(this.myButtonFacturar);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.metroLabelDetalle);
             this.Controls.Add(this.panelTop);
@@ -180,6 +196,7 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label metroLabelDetalle;
         private System.Windows.Forms.Panel panel2;
+        private MyButton myButtonFacturar;
     }
 }
 

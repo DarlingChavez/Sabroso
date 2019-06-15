@@ -7,7 +7,6 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Sabroso
 {
@@ -15,7 +14,7 @@ namespace Sabroso
     {
         private static int m_currentPageIndex;
         private static IList<Stream> m_streams;
-        public static void Imprimir(string reportName,string sourceName,object dataSource, ReportParameter[] parametros)
+        public static void Imprimir(string reportName, string sourceName, object dataSource, ReportParameter[] parametros)
         {
             LocalReport report = new LocalReport();
             report.ReportEmbeddedResource = reportName;
@@ -59,7 +58,7 @@ namespace Sabroso
                 printDoc.Print();
             }
         }
-        private static Stream CreateStream(string name,string fileNameExtension, Encoding encoding,string mimeType, bool willSeek)
+        private static Stream CreateStream(string name, string fileNameExtension, Encoding encoding, string mimeType, bool willSeek)
         {
             Stream stream = new MemoryStream();
             m_streams.Add(stream);

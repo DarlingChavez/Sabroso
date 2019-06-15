@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Sabroso
@@ -50,7 +47,7 @@ namespace Sabroso
             int max = 0;
             try
             {
-                using(Context context = new Context())
+                using (Context context = new Context())
                 {
                     max = context.Set<T>().Max(e => e.Id);
                 }
@@ -61,11 +58,11 @@ namespace Sabroso
 
         public static T Get<T>(int id) where T : Entity
         {
-            using(Context context = new Context())
+            using (Context context = new Context())
             {
                 return context.Set<T>().Where(e => e.Id == id).FirstOrDefault();
             }
         }
-        
+
     }
 }

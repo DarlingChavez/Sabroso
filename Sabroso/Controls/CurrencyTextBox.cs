@@ -16,7 +16,7 @@ namespace Sabroso
         public decimal DollarValue
         {
             get { return mDollarValue; }
-            set { mDollarValue = value;this.Text = value.ToString("C"); }
+            set { mDollarValue = value; this.Text = value.ToString("C"); }
         }
         public CurrencyTextBox()
         {
@@ -78,6 +78,11 @@ namespace Sabroso
                 DollarValue = Convert.ToDecimal(this.Text);
             }
             catch { }
+        }
+
+        protected void Clean()
+        {
+            mDollarValue = 0;
         }
     }
 }

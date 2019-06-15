@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JetEntityFrameworkProvider;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
 
 namespace Sabroso
 {
@@ -15,6 +11,10 @@ namespace Sabroso
         {
 
         }
+
+
+
+
 
         public DbSet<CabeceraCompra> CabeceraCompra { get; set; }
         public DbSet<CabeceraFactura> CabeceraFactura { get; set; }

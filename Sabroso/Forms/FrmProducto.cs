@@ -8,12 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace Sabroso
 {
     public partial class FrmProducto : UIChildForm
     {
         private Context context = new Context();
+        private string rutaImagenes;
+
         public FrmProducto()
         {
             InitializeComponent();
@@ -27,6 +30,36 @@ namespace Sabroso
             txtPrecio.KeyPress += Control_KeyPress;
             cmbCategoria.KeyPress += Control_KeyPress;
             this.KeyDown += new KeyEventHandler(FormKeyDown);
+        }
+
+        private void BloquearCampos(bool bloqueo)
+        {
+            txtCodigo.ReadOnly = bloqueo;
+            txtDescripcion.ReadOnly = bloqueo;
+            cmbCategoria.Enabled = !bloqueo;
+            txtPrecio.ReadOnly = bloqueo;
+            cmbMedida.Enabled = !bloqueo;
+            buttonSeleccionarImagen.Enabled = !bloqueo;
+            if (bloqueo == true)
+            {
+                if (myBasicControlEntity.Count < 1)
+                {
+                    cmbCategoria.SelectedItem = MyEnums.GetFromEnum(Categoria.Seleccione);
+                    cmbMedida.SelectedItem = MyEnums.GetFromEnum(Medida.Seleccione);
+                }
+            }
+        }
+
+        private void buttonSeleccionarImagen_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png, *.gif) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png; *.gif | All files | *";
+            var result = ofd.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string fileName = ofd.FileName;
+                pictureBoxImagen.ImageLocation = fileName;
+            }
         }
 
         private void Control_KeyPress(object sender, KeyPressEventArgs e)
@@ -77,7 +110,126 @@ namespace Sabroso
                 }
             }
         }
-        
+
+        private void FrmProducto_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenarCombos();
+                LoadData();
+                LoadRutas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool HaveUniqueViolation(string codigo)
+        {
+            var producto = context.Producto.Where(c => c.Codigo.Equals(codigo)).FirstOrDefault();
+            var exists = (producto != null);
+            if (exists)
+            {
+                string mensaje = "Ya existe un producto con el codigo ingresado: " + producto.Codigo + " - " + producto.Descripcion + "\n Por favor ingrese otro codigo";
+                MessageBox.Show(mensaje, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCodigo.Focus();
+            }
+            return exists;
+        }
+
+        private void LlenarCombos()
+        {
+            cmbCategoria.DisplayMember = "Description";
+            cmbCategoria.ValueMember = "Id";
+            cmbCategoria.DataSource = Enum.GetValues(typeof(Categoria))
+            .Cast<Enum>()
+            .Select(value => new CustomAttribute
+            (
+                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(CustomAttribute)) as CustomAttribute).Id,
+                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(CustomAttribute)) as CustomAttribute).Description
+            )).OrderBy(item => item.Id).ToList();
+            cmbMedida.DisplayMember = "Description";
+            cmbMedida.ValueMember = "Id";
+            cmbMedida.DataSource = Enum.GetValues(typeof(Medida))
+            .Cast<Enum>()
+            .Select(value => new CustomAttribute
+            (
+                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(CustomAttribute)) as CustomAttribute).Id,
+                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(CustomAttribute)) as CustomAttribute).Description
+            )).OrderBy(item => item.Id).ToList();
+        }
+
+        private void LoadData()
+        {
+
+            myBasicControlEntity.DisplayMember = "DisplayMember";
+            myBasicControlEntity.DataSource = (from entry in context.Producto
+                                               where entry.Status == Status.Activo
+                                               select entry).ToList().ConvertAll(p => (Entity)p);
+
+        }
+
+        private void LoadRutas()
+        {
+            this.rutaImagenes = ConfigurationManager.AppSettings["folderimagenes"].ToString();
+        }
+
+        private void MyBasicControlEntity_EventoEntityChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var entity = (Producto)myBasicControlEntity.SelectedEntity;
+                var haveEntity = (entity != null);
+                myCRUDButtonsProductos.HaveSelectedEntity = haveEntity;
+                if (haveEntity)
+                {
+                    Categoria categoria = entity.Categoria;
+                    var type = categoria.GetType();
+                    var name = Enum.GetName(type, categoria);
+                    var atributo = type.GetField(name).GetCustomAttributes(false).OfType<CustomAttribute>().SingleOrDefault();
+                    cmbCategoria.SelectedValue = atributo.Id;
+                    groupBoxEntity.Text = "Producto seleccionado";
+                    Medida medida = entity.Medida;
+                    var type2 = medida.GetType();
+                    var name2 = Enum.GetName(type, medida);
+                    var atributo2 = type.GetField(name2).GetCustomAttributes(false).OfType<CustomAttribute>().SingleOrDefault();
+                    cmbMedida.SelectedValue = atributo2.Id;
+
+                    txtId.Text = entity.Id.ToString();
+                    txtCodigo.Text = entity.Codigo;
+                    txtDescripcion.Text = entity.Descripcion;
+                    txtPrecio.DollarValue = entity.Precio;
+                    pictureBoxImagen.ImageLocation = entity.RutaImagen;
+
+                    myCRUDButtonsProductos.Accion = Actions.Cancel;
+                    BloquearCampos(true);
+                }
+                else
+                {
+                    txtId.Clear();
+                    txtCodigo.Clear();
+                    txtPrecio.DollarValue = 0;
+                    txtDescripcion.Clear();
+                    Categoria categoria = Categoria.Seleccione;
+                    var type = categoria.GetType();
+                    var name = Enum.GetName(type, categoria);
+                    var atributo = type.GetField(name).GetCustomAttributes(false).OfType<CustomAttribute>().SingleOrDefault();
+                    cmbCategoria.SelectedValue = atributo.Id;
+                    groupBoxEntity.Text = "Ingrese un nuevo producto";
+                    Medida medida = Medida.Seleccione;
+                    var type2 = categoria.GetType();
+                    var name2 = Enum.GetName(type2, medida);
+                    var atributo2 = type.GetField(name).GetCustomAttributes(false).OfType<CustomAttribute>().SingleOrDefault();
+                    cmbMedida.SelectedValue = atributo2.Id;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void MyBasicControlEntity_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             MyBasicControlEntity_EventoEntityChanged(null, null);
@@ -92,9 +244,10 @@ namespace Sabroso
                         txtCodigo.Clear();
                         txtDescripcion.Clear();
                         txtId.Clear();
-                        txtPrecio.Clear();
+                        txtPrecio.Text = string.Empty;
                         cmbCategoria.SelectedIndex = 0;
                         cmbMedida.SelectedIndex = 0;
+                        pictureBoxImagen.ImageLocation = string.Empty;
                         BloquearCampos(false);
                         txtCodigo.Focus();
                         break;
@@ -103,7 +256,7 @@ namespace Sabroso
                     {
                         BloquearCampos(true);
                         myBasicControlEntity.Focus();
-                        MyBasicControlEntity_EventoEntityChanged(null,null);
+                        MyBasicControlEntity_EventoEntityChanged(null, null);
                         break;
                     }
                 case Actions.Delete:
@@ -114,7 +267,7 @@ namespace Sabroso
                         if (count > 0)
                         {
                             LoadData();
-                            MessageBox.Show("Registro eliminado correctamente","Listo!",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                            MessageBox.Show("Registro eliminado correctamente", "Listo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             if (myBasicControlEntity.Count > 0)
                             {
                                 myBasicControlEntity.Focus();
@@ -141,6 +294,8 @@ namespace Sabroso
                 case Actions.Save:
                     {
                         decimal precio = txtPrecio.DollarValue;
+                        string rutaImagen = string.Concat(this.rutaImagenes, DateTime.Now.ToString("yyyyMMdd hhmmss"));
+                        if (string.IsNullOrEmpty(this.pictureBoxImagen.ImageLocation)) { rutaImagen = string.Empty; }
                         var entity = new Producto()
                         {
                             Codigo = txtCodigo.Text,
@@ -148,12 +303,13 @@ namespace Sabroso
                             Descripcion = txtDescripcion.Text,
                             Medida = ((Medida)((CustomAttribute)cmbMedida.SelectedItem).Id),
                             Precio = precio,
-                            Status = Status.Activo
+                            Status = Status.Activo,
+                            RutaImagen = rutaImagen
                         };
-                        if(myCRUDButtonsProductos.Bandera == BanderaGuardar.Edit)
+                        if (myCRUDButtonsProductos.Bandera == BanderaGuardar.Edit)
                         {
                             var entry = ((Producto)myBasicControlEntity.SelectedEntity);
-                            if(entry.Codigo != entity.Codigo)
+                            if (entry.Codigo != entity.Codigo)
                             {
                                 bool violation = HaveUniqueViolation(entity.Codigo);
                                 if (violation)
@@ -167,8 +323,9 @@ namespace Sabroso
                             entry.Descripcion = entity.Descripcion;
                             entry.Medida = entity.Medida;
                             entry.Precio = entity.Precio;
+                            entry.RutaImagen = entity.RutaImagen;
                         }
-                        else if(myCRUDButtonsProductos.Bandera == BanderaGuardar.New)
+                        else if (myCRUDButtonsProductos.Bandera == BanderaGuardar.New)
                         {
                             bool violation = HaveUniqueViolation(entity.Codigo);
                             if (violation)
@@ -197,7 +354,7 @@ namespace Sabroso
                             context = new Context();
                             LoadData();
                             myBasicControlEntity.ClearFilter();
-                            MyBasicControlEntity_EventoEntityChanged(null,null);
+                            MyBasicControlEntity_EventoEntityChanged(null, null);
                             if (!(myBasicControlEntity.Count > 0))
                             {
                                 myCRUDButtonsProductos.Accion = Actions.Neutro;
@@ -214,137 +371,10 @@ namespace Sabroso
             }
         }
 
-        private bool HaveUniqueViolation(string codigo)
-        {
-            var producto = context.Producto.Where(c => c.Codigo.Equals(codigo)).FirstOrDefault();
-            var exists = (producto != null);
-            if (exists)
-            {
-                string mensaje = "Ya existe un producto con el codigo ingresado: " + producto.Codigo + " - " + producto.Descripcion + "\n Por favor ingrese otro codigo";
-                MessageBox.Show(mensaje, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCodigo.Focus();
-            }
-            return exists;
-        }
-        
-        private void LoadData()
-        {
-            
-            myBasicControlEntity.DisplayMember = "DisplayMember";
-            myBasicControlEntity.DataSource = (from entry in context.Producto
-                                               where entry.Status == Status.Activo
-                                               select entry).ToList().ConvertAll(p=>(Entity)p);
-            
-        }
-
-        private void BloquearCampos(bool bloqueo)
-        {
-            txtCodigo.ReadOnly = bloqueo;
-            txtDescripcion.ReadOnly = bloqueo;
-            cmbCategoria.Enabled = !bloqueo;
-            txtPrecio.ReadOnly = bloqueo;
-            cmbMedida.Enabled = !bloqueo;
-            if (bloqueo == true)
-            {
-                if (myBasicControlEntity.Count<1)
-                {
-                    cmbCategoria.SelectedItem = MyEnums.GetFromEnum(Categoria.Seleccione);
-                    cmbMedida.SelectedItem = MyEnums.GetFromEnum(Medida.Seleccione);
-                }
-            }
-        }
-
-        private void FrmProducto_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                LlenarCombos();
-                
-                LoadData();
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void LlenarCombos()
-        {
-            cmbCategoria.DisplayMember = "Description";
-            cmbCategoria.ValueMember = "Id";
-            cmbCategoria.DataSource = Enum.GetValues(typeof(Categoria))
-            .Cast<Enum>()
-            .Select(value => new CustomAttribute
-            (
-                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(CustomAttribute)) as CustomAttribute).Id,
-                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(CustomAttribute)) as CustomAttribute).Description
-            )).OrderBy(item => item.Id).ToList();
-            cmbMedida.DisplayMember = "Description";
-            cmbMedida.ValueMember = "Id";
-            cmbMedida.DataSource = Enum.GetValues(typeof(Medida))
-            .Cast<Enum>()
-            .Select(value => new CustomAttribute
-            (
-                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(CustomAttribute)) as CustomAttribute).Id,
-                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(CustomAttribute)) as CustomAttribute).Description
-            )).OrderBy(item => item.Id).ToList();
-        }
-
         private void MyLabelClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void MyBasicControlEntity_EventoEntityChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                var entity = (Producto)myBasicControlEntity.SelectedEntity;
-                var haveEntity = (entity != null);
-                myCRUDButtonsProductos.HaveSelectedEntity = haveEntity;
-                if (haveEntity)
-                {
-                    Categoria categoria = entity.Categoria;
-                    var type = categoria.GetType();
-                    var name = Enum.GetName(type, categoria);
-                    var atributo = type.GetField(name).GetCustomAttributes(false).OfType<CustomAttribute>().SingleOrDefault();
-                    cmbCategoria.SelectedValue = atributo.Id;
-                    groupBoxEntity.Text = "Producto seleccionado";
-                    Medida medida = entity.Medida;
-                    var type2 = medida.GetType();
-                    var name2 = Enum.GetName(type, medida);
-                    var atributo2 = type.GetField(name2).GetCustomAttributes(false).OfType<CustomAttribute>().SingleOrDefault();
-                    cmbMedida.SelectedValue = atributo2.Id;
-
-                    txtId.Text = entity.Id.ToString();
-                    txtCodigo.Text = entity.Codigo;
-                    txtDescripcion.Text = entity.Descripcion;
-                    txtPrecio.DollarValue = entity.Precio;
-
-                    myCRUDButtonsProductos.Accion = Actions.Cancel;
-                    BloquearCampos(true);
-                }
-                else
-                {
-                    txtId.Clear();
-                    txtCodigo.Clear();
-                    txtPrecio.DollarValue = 0;
-                    txtDescripcion.Clear();
-                    Categoria categoria = Categoria.Seleccione;
-                    var type = categoria.GetType();
-                    var name = Enum.GetName(type,categoria);
-                    var atributo = type.GetField(name).GetCustomAttributes(false).OfType<CustomAttribute>().SingleOrDefault();
-                    cmbCategoria.SelectedValue = atributo.Id;
-                    groupBoxEntity.Text = "Ingrese un nuevo producto";
-                    Medida medida = Medida.Seleccione;
-                    var type2 = categoria.GetType();
-                    var name2 = Enum.GetName(type2, medida);
-                    var atributo2 = type.GetField(name).GetCustomAttributes(false).OfType<CustomAttribute>().SingleOrDefault();
-                    cmbMedida.SelectedValue = atributo2.Id;
-                }
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
-        }
     }
 }

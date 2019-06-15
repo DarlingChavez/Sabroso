@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Sabroso
@@ -17,16 +12,17 @@ namespace Sabroso
             InitializeComponent();
             this.Mover();
         }
-        
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             try
             {
                 configuration = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.None);
                 CrearBase();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
             string value = configuration.AppSettings.Settings["expiro"].Value;
@@ -67,9 +63,10 @@ namespace Sabroso
             {
                 ADOX.Catalog catalog = new ADOX.Catalog();
                 catalog.Create(cs);
-                using(Context context = new Context())
+                using (Context context = new Context())
                 {
-                    context.Database.ExecuteSqlCommand("Insert into Cliente(Cedula,Nombre,Status) values('9999999999','Consumidor Final',0)");
+                    context.Database.ExecuteSqlCommand("Insert into Cliente(Cedula,Nombre,Status) values('9999999999999','Consumidor Final',1)");
+                    //here add user of system
                 }
             }
         }
@@ -91,12 +88,12 @@ namespace Sabroso
         {
             OpenChild(typeof(FrmProducto));
         }
-        
+
         private void OpenChild(Type type)
         {
-            foreach(object obj in panelMain.Controls)
+            foreach (object obj in panelMain.Controls)
             {
-                if(obj.GetType() == type)
+                if (obj.GetType() == type)
                 {
                     ((Form)obj).Show();
                     ((Form)obj).Refresh();
@@ -108,7 +105,7 @@ namespace Sabroso
             panelMain.Controls.Add((Form)frmChild);
             ((Form)frmChild).WindowState = FormWindowState.Maximized;
             ((Form)frmChild).Show();
-            CrearMenu:
+        CrearMenu:
             formulariosToolStripMenuItem.DropDownItems.Clear();
             foreach (object obj in panelMain.Controls)
             {
@@ -126,7 +123,7 @@ namespace Sabroso
                     item.Click += Item_Click;
                     formulariosToolStripMenuItem.DropDownItems.Add(item);
                 }
-                catch(InvalidCastException)
+                catch (InvalidCastException)
                 {
                     var formulario = ((Form)obj);
                     formulario.ShowIcon = false;
@@ -134,7 +131,7 @@ namespace Sabroso
                         formulario.Hide();
                     ToolStripItem item = new ToolStripMenuItem()
                     {
-                        Name = "toolStripItem"+formulario.Name,
+                        Name = "toolStripItem" + formulario.Name,
                         Text = formulario.Text,
                         Tag = formulario.GetType()
                     };
@@ -150,8 +147,8 @@ namespace Sabroso
         }
         protected internal void CloseChild(Type type)
         {
-            foreach(object obj in panelMain.Controls)
-                if(obj.GetType() == type)
+            foreach (object obj in panelMain.Controls)
+                if (obj.GetType() == type)
                     ((Form)obj).Close();
             foreach (ToolStripItem item in formulariosToolStripMenuItem.DropDownItems)
                 if (((Type)item.Tag) == type)
@@ -167,8 +164,8 @@ namespace Sabroso
 
         private void Salir()
         {
-            var result = MessageBox.Show(this,"Seguro desea salir de la aplicación?","Confirmar",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            if(result == DialogResult.Yes)
+            var result = MessageBox.Show(this, "Seguro desea salir de la aplicación?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
                 this.Close();
             }
@@ -197,6 +194,16 @@ namespace Sabroso
         private void puntoDeVentaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenChild(typeof(FrmVenta));
+        }
+
+        private void accesoRapidoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChild(typeof(FrmAccesoRapido));
+        }
+
+        private void reimprimirFacturaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
